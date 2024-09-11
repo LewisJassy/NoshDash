@@ -103,9 +103,9 @@ MongoDB (Local setup or MongoDB Atlas)
 
 1. Clone the Repository:
 
-    git clone https://github.com/sushanthreddy009/Food_Delivery_Application.git
+    git clone https://github.com/LewisJassy/NoshDash.git
   
-    cd Food_Delivery_Application
+    cd NoshDash
 
 2. Install Backend Dependencies:
 
