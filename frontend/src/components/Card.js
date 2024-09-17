@@ -41,7 +41,7 @@ export default function Card(props) {
     }
     console.log(food)
     console.log(new Date())
-    if (food !== []) {
+    if (Array.isArray(food) && food.length === 0) {
       if (food.size === size) {
         await dispatch({ type: "UPDATE", id: foodItem._id, price: finalPrice, qty: qty })
         return

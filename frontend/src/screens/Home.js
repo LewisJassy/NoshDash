@@ -36,7 +36,7 @@ export default function Home() {
         <div id="carouselExampleFade" className="carousel slide carousel-fade " data-bs-ride="carousel">
 
           <div className="carousel-inner " id='carousel'>
-            <div class=" carousel-caption  " style={{ zIndex: "9" }}>
+            <div className=" carousel-caption  " style={{ zIndex: "9" }}>
               <div className=" d-flex justify-content-center">  {/* justify-content-center, copy this <form> from navbar for search box */}
                 <input className="form-control me-2 w-75 bg-white text-dark" type="search" placeholder="Search in here..." aria-label="Search" value={search} onChange={(e) => { setSearch(e.target.value) }} />
                 <button className="btn text-white bg-danger" onClick={() => { setSearch('') }}>X</button>
@@ -64,7 +64,7 @@ export default function Home() {
       </div>
       <div className='container'> {/* boootstrap is mobile first */}
         {
-          foodCat !== []
+          foodCat.length > 0
             ? foodCat.map((data) => {
               return (
                 // justify-content-center
@@ -73,7 +73,7 @@ export default function Home() {
                     {data.CategoryName}
                   </div>
                   <hr id="hr-success" style={{ height: "4px", backgroundImage: "-webkit-linear-gradient(left,rgb(0, 255, 137),rgb(0, 0, 0))" }} />
-                  {foodItems !== [] ? foodItems.filter(
+                  {foodItems.length > 0 ? foodItems.filter(
                     (items) => (items.CategoryName === data.CategoryName) && (items.name.toLowerCase().includes(search.toLowerCase())))
                     .map(filterItems => {
                       return (
