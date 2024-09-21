@@ -37,8 +37,8 @@ This is a full-stack food ordering web application built using the MERN stack (M
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/DulanjaliSenarathna/mern-food-delivery-app.git
-cd mern-food-delivery-app
+git clone https://github.com/LewisJassy/NoshDash.git
+cd NoshDash
 ```
 
 ## Backend Setup
