@@ -2,13 +2,20 @@ import React from 'react'
 import './Footer.css'
 import { assets } from '../../assets/assets'
 
+/**
+ * The Footer component.
+ * @returns {React.ReactElement} The Footer component.
+ * @description The Footer component displays a footer with the app's name, a quote, social media icons, and a copyright notice.
+ */
 const Footer = () => {
   return (
     <div className='footer' id='footer'>
         <div className="footer-content">
             <div className="footer-content-left">
                 <img src={assets.logo} alt="" />
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum in, beatae dolorem non optio cupiditate, quam sunt dicta dolores minima exercitationem ducimus totam aut asperiores inventore harum laudantium. Distinctio, libero.</p>
+                <p>
+                    Enjoy the best meals from your favorite restaurants delivered fast and fresh to your doorstep. Whether you're craving pizza, sushi, or burgers, we've got you covered. Order now and experience quick, convenient, and delicious food delivery at your fingertips.
+                </p>
                 <div className="footer-social-icons">
                     <img src={assets.facebook_icon} alt="" />
                     <img src={assets.twitter_icon} alt="" />
