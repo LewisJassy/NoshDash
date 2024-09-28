@@ -1,4 +1,5 @@
-import React, {  useContext, useState } from 'react'
+import { useContext, useState } from 'react'
+import PropTypes from 'prop-types';
 import './LoginPopup.css'
 import { assets } from '../../assets/assets'
 import { StoreContext } from './../context/StoreContext';
@@ -40,13 +41,16 @@ const LoginPopup = ({setShowLogin}) => {
             alert(response.data.message);
         }
    }
-
+  
+  const handleClose = () => {
+    setShowLogin(false);
+  };
   return (
     <div className='login-popup'>
         <form onSubmit={onLogin} className="login-popup-container">
             <div className="login-popup-title">
                 <h2>{currentState}</h2>
-                <img onClick={()=>setShowLogin(false)} src={assets.cross_icon} alt="" />
+                <img onClick={handleClose} src={assets.cross_icon} alt="" />
             </div>
             <div className="login-popup-inputs">
                 {currentState==='Login'?<></>: <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Your name' required />}
@@ -69,5 +73,8 @@ const LoginPopup = ({setShowLogin}) => {
     </div>
   )
 }
+LoginPopup.propTypes = {
+  setShowLogin: PropTypes.func.isRequired,
+};
 
 export default LoginPopup

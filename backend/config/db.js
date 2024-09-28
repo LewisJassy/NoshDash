@@ -6,4 +6,10 @@ async function connectDB () {
     });
 }
 
-export default connectDB;
+async function disconnectDB() {
+    await mongoose.disconnect().then(() => {
+        console.log("DB disconnected")
+    })
+}
+
+export { disconnectDB, connectDB };

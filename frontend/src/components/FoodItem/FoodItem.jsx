@@ -1,4 +1,5 @@
-import React, { useContext} from 'react'
+import { useContext } from 'react'
+import PropTypes from 'prop-types';
 import './FoodItem.css'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../context/StoreContext';
@@ -31,5 +32,12 @@ const FoodItem = ({id,name,price,description,image}) => {
     </div>
   )
 }
+FoodItem.propTypes = {
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+};
 
 export default FoodItem

@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import connectDB from './config/db.js'
+import { connectDB, disconnectDB } from './config/db.js'
 import foodRouter from './routes/foodRoute.js'
 import userRouter from './routes/userRoute.js';
 import 'dotenv/config';
@@ -32,5 +32,17 @@ app.get("/",(req,res)=>{
 app.listen(port,()=>{
     console.log(`Server started on http://localhost:${port}`)
 })
+
+const gracefulShutdown =  async () => {
+    console.log('Shutting down gracefully...')
+    await disconnectDB();
+    server.close(() => {
+        console.log('Service worker closed successfully.')
+        process.exit(0)  // exit with success code
+    })
+}
+
+process.on('SIGINT', gracefulShutdown)
+process.on('SIGTERM', gracefulShutdown)
 
 //mongodb+srv://dulanjalisenarathna93:E2JUb0zfaT2FVp8D@cluster0.exkxkun.mongodb.net/?
