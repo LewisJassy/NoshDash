@@ -2,12 +2,16 @@ import userModel from "../models/userModel.js";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import validator from 'validator'
+// import db from "../config/db.js"
 
 //login user
 const loginUser = async (req,res) =>{
     const {email, password} = req.body;
+    console.log(email);
     try {
+        // await db.connect();
         const user = await userModel.findOne({email});
+        console.log(user);
 
         if(!user){
            return res.json({success:false, message:'User does not exist'}) 
@@ -25,6 +29,7 @@ const loginUser = async (req,res) =>{
         console.log(error)
         res.json({success:false, message:'Error'})
     }
+
 }
 
 const createToken = (id) =>{
