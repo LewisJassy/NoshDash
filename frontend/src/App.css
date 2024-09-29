@@ -29,3 +29,7 @@ a{
     opacity: 1;
   }
 }
+
+.app-content {
+    margin-top: 60px; /* Adjust this value to match the height of your navbar */
+}

@@ -4,6 +4,7 @@
     background: url('/header_img.png') no-repeat;
     background-size: cover;
     position: relative;
+    padding: 20px;
 }
 
 .header-contents{
