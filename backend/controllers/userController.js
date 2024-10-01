@@ -5,32 +5,40 @@ import validator from 'validator'
 // import db from "../config/db.js"
 
 //login user
-const loginUser = async (req,res) =>{
-    const {email, password} = req.body;
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
     console.log(email);
     try {
         // await db.connect();
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({ email });
         console.log(user);
 
-        if(!user){
-           return res.json({success:false, message:'User does not exist'}) 
+        if (!user) {
+            return res.json({ success: false, message: 'User does not exist' });
         }
 
-        const isMatch = await bcrypt.compare(password,user.password)
+        const isMatch = await bcrypt.compare(password, user.password);
 
-        if(!isMatch){
-            return res.json({success:false, message:'Invalid credentials'})
+        if (!isMatch) {
+            return res.json({ success: false, message: 'Invalid credentials' });
         }
 
         const token = createToken(user._id);
-        res.json({success:true, token})
+        res.json({
+            success: true,
+            token,
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                cartData: user.cartData
+            }
+        });
     } catch (error) {
-        console.log(error)
-        res.json({success:false, message:'Error'})
+        console.log(error);
+        res.json({ success: false, message: 'Error' });
     }
-
-}
+};
 
 const createToken = (id) =>{
     return jwt.sign({id},process.env.JWT_SECRET)

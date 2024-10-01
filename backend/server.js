@@ -11,6 +11,10 @@ import orderRouter from './routes/orderRoute.js';
 const app = express()
 const port = 4000
 
+const server = app.listen(() => {
+    console.log(`Server is running`);
+});
+
 // middleware
 app.use(express.json())
 app.use(cors())
