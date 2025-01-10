@@ -17,8 +17,10 @@ const server = app.listen(() => {
 
 // middleware
 app.use(express.json())
-app.use(cors())
-
+app.use(cors({
+    origin: 'https://noshdash-80k0q2nsn-lewis-projects-1f0875cf.vercel.app/',
+    credentials: true,
+  }));
 //db connection
 connectDB();
 
