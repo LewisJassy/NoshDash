@@ -1,53 +1,58 @@
-import express from 'express'
-import cors from 'cors'
-import { connectDB, disconnectDB } from './config/db.js'
-import foodRouter from './Routes/foodRoute.js'
+import express from 'express';
+import cors from 'cors';
+import { connectDB, disconnectDB } from './config/db.js';
+import foodRouter from './Routes/foodRoute.js';
 import userRouter from './Routes/userRoute.js';
-import 'dotenv/config';
 import cartRouter from './Routes/cartRoute.js';
 import orderRouter from './Routes/orderRoute.js';
+import 'dotenv/config';
 
-//app config
-const app = express()
-const port = 4000
+const app = express();
+const port = process.env.PORT || 4000;
 
-const server = app.listen(() => {
-    console.log(`Server is running`);
-});
-
-// middleware
-app.use(express.json())
-app.use(cors({
-    origin: 'https://noshdash-80k0q2nsn-lewis-projects-1f0875cf.vercel.app/',
+// Middleware
+app.use(express.json());
+app.use(
+  cors({
+    origin: 'https://noshdash-80k0q2nsn-lewis-projects-1f0875cf.vercel.app',
     credentials: true,
-  }));
-//db connection
+  })
+);
+
+// Database Connection
 connectDB();
 
-// api endpoints
-app.use("/api/food",foodRouter)
-app.use("/images",express.static('uploads'))
-app.use('/api/user', userRouter)
-app.use('/api/cart', cartRouter)
-app.use('/api/order', orderRouter)
+// API Endpoints
+app.use('/api/food', foodRouter);
+app.use('/images', express.static('uploads'));
+app.use('/api/user', userRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
 
-app.get("/",(req,res)=>{
-        res.send("API working")
-})
+// Health Check
+app.get('/', (req, res) => {
+  res.send('API working');
+});
 
-app.listen(port,()=>{
-    console.log(`Server started on http://localhost:${port}`)
-})
+// Start Server
+const server = app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
 
-const gracefulShutdown =  async () => {
-    console.log('Shutting down gracefully...')
+// Graceful Shutdown
+const gracefulShutdown = async () => {
+  console.log('Shutting down gracefully...');
+  try {
     await disconnectDB();
     server.close(() => {
-        console.log('Service worker closed successfully.')
-        process.exit(0)  // exit with success code
-    })
-}
+      console.log('Server closed successfully.');
+      process.exit(0);
+    });
+  } catch (error) {
+    console.error('Error during shutdown:', error);
+    process.exit(1);
+  }
+};
 
-process.on('SIGINT', gracefulShutdown)
-process.on('SIGTERM', gracefulShutdown)
-
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
