@@ -1,80 +1,64 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
+import axios from 'axios';
+import { StoreContext } from '../context/StoreContext';
 import PropTypes from 'prop-types';
-import './LoginPopup.css'
-import { assets } from '../../assets/assets'
-import { StoreContext } from './../context/StoreContext';
-import axios from 'axios'
 
-const LoginPopup = ({setShowLogin}) => {
+const LoginPopup = ({ setShowLogin }) => {
+    const { url, setToken } = useContext(StoreContext);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const {url, setToken} = useContext(StoreContext)
-
-    const [currentState, setCurrentState] = useState('Login')
-    const [data, setData] = useState({
-        name:"",
-        email:"",
-        password:""
-    })
-
-    const onChangeHandler = (event) =>{
-        const name = event.target.name
-        const value = event.target.value 
-        setData(data=>({...data,[name]:value}))
-    }
-
-   const onLogin = async (event) =>{
-        event.preventDefault()
-        let newUrl = url;
-        if(currentState==='Login'){
-            newUrl+= "/api/user/login"
-        }else{
-            newUrl += "/api/user/register"
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+        
+        try {
+            const response = await axios.post(`${url}/api/user/login`, formData);
+            if (response.data.success) {
+                setToken(response.data.token);
+                setShowLogin(false);
+            } else {
+                setError(response.data.message);
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || 'Network error. Please try again.');
+            console.error('Login error:', err);
+        } finally {
+            setLoading(false);
         }
+    };
 
-        const response = await axios.post(newUrl,data);
-
-        if(response.data.success){
-            setToken(response.data.token);
-            localStorage.setItem("token", response.data.token)
-            setShowLogin(false);
-        }else{
-            alert(response.data.message);
-        }
-   }
-  
-  const handleClose = () => {
-    setShowLogin(false);
-  };
-  return (
-    <div className='login-popup'>
-        <form onSubmit={onLogin} className="login-popup-container">
-            <div className="login-popup-title">
-                <h2>{currentState}</h2>
-                <img onClick={handleClose} src={assets.cross_icon} alt="" />
-            </div>
-            <div className="login-popup-inputs">
-                {currentState==='Login'?<></>: <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Your name' required />}
-               
-                <input name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Your email' required />
-                <input name='password' onChange={onChangeHandler} value={data.password} type="password" placeholder='Password' required />
-            </div>
-
-            <button type='submit'>{currentState==='Sign Up'?'Create account':'Login'}</button>
-            <div className="login-popup-condition">
-                <input type="checkbox" required />
-                <p>By continuing, I agree to the terms of use & privacy policy</p>
-            </div>
-            {currentState==='Login'?
-             <p>Create a new account? <span onClick={()=> setCurrentState('Sign Up')}>Click here</span></p>
-             :<p>Already have an account? <span onClick={()=> setCurrentState('Login')}>Login here</span></p>}
-            
-            
-        </form>
-    </div>
-  )
-}
+    return (
+        <div className="popup">
+            <form onSubmit={handleSubmit}>
+                {error && <div className="error">{error}</div>}
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={(e) => setFormData({...formData, password: e.target.value})}
+                />
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                </button>
+            </form>
+        </div>
+    );
+};
 LoginPopup.propTypes = {
-  setShowLogin: PropTypes.func.isRequired,
+    setShowLogin: PropTypes.func.isRequired,
 };
 
-export default LoginPopup
+export default LoginPopup;
