@@ -14,7 +14,7 @@ const port = process.env.PORT || 10000;
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://noshdash-80k0q2nsn-lewis-projects-1f0875cf.vercel.app',
+    origin: 'https://nosh-dash.vercel.app',
     credentials: true,
   })
 );
