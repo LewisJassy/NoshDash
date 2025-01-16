@@ -95,12 +95,24 @@
     border-radius: 4px;
 }
 
-@media (max-width:750px){
-    .cart-bottom{
-        flex-direction: column-reverse;
+@media (max-width: 768px) {
+    .cart-items-title {
+      grid-template-columns: 1fr 1.5fr 1fr;
+      font-size: 12px;
     }
-
-    .cart-promocode{
-        justify-content: start;
+  
+    .cart-items-title p:nth-child(3),
+    .cart-items-title p:nth-child(4),
+    .cart-items-title p:nth-child(5) {
+      display: none;
     }
-}
+  
+    .cart-bottom {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .cart-total button {
+      width: 100%;
+    }
+  }

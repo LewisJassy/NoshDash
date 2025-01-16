@@ -40,23 +40,26 @@
     border-radius: 50px;
 }
 
-@media (max-width:1050px){
-.header-contents{
-    max-width: 45%;
-}
-}
+@media (max-width: 768px) {
+  .header {
+    height: 50vw;
+  }
 
-@media (max-width:750px){
-    
-    .header-contents{
-        max-width: 65%;
-    }
+  .header-contents {
+    max-width: 80%;
+    bottom: 5%;
+  }
 
-    .header-contents p {
-        display: none;
-    }
+  .header-contents h2 {
+    font-size: 24px;
+  }
 
-    .header-contents button{
-        padding: 2vw 4vw;
-    }
+  .header-contents p {
+    font-size: 14px;
+  }
+
+  .header-contents button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
 }

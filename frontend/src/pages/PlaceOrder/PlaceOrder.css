@@ -39,3 +39,22 @@
 .place-order .cart-total button{
     margin-top: 30px;
 }
+
+
+@media (max-width: 768px) {
+  .place-order {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .place-order-left,
+  .place-order-right {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .multi-fields {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

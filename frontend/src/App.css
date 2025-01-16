@@ -33,3 +33,10 @@ a{
 .app-content {
     margin-top: 60px; /* Adjust this value to match the height of your navbar */
 }
+
+@media (max-width: 768px) {
+  .app {
+    width: 95%;
+    padding: 0 10px;
+  }
+}
