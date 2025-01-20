@@ -53,9 +53,9 @@ const LoginPopup = ({setShowLogin}) => {
                 <img onClick={handleClose} src={assets.cross_icon} alt="" />
             </div>
             <div className="login-popup-inputs">
-                {currentState==='Login'?<></>: <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Your name' required />}
+                {currentState==='Login'?<></>: <input name='name' onChange={onChangeHandler} type="text" placeholder='Your name' required />}
                
-                <input name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Your email' required />
+                <input name='email' onChange={onChangeHandler} type="email" placeholder='Your email' required />
                 <input name='password' onChange={onChangeHandler} type="password" placeholder='Password' required autoComplete='password' />
             </div>
 
