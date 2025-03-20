@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 import { connectDB, disconnectDB } from './config/db.js';
 import foodRouter from './Routes/foodRoute.js';
 import userRouter from './Routes/userRoute.js';
@@ -10,11 +12,47 @@ import 'dotenv/config';
 const app = express();
 const port = process.env.PORT || 10000;
 
+// Create HTTP server
+const httpServer = createServer(app);
+
+// Setup Socket.io
+const io = new Server(httpServer, {
+  cors: {
+    origin: process.env.NODE_ENV === 'production' 
+      ? 'https://nosh-dash.vercel.app' 
+      : 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
+});
+
+// Socket.io connection handling
+io.on('connection', (socket) => {
+  console.log('New client connected', socket.id);
+  
+  // Track a specific order
+  socket.on('track_order', (orderId) => {
+    console.log(`Client ${socket.id} tracking order ${orderId}`);
+    // Add client to a room specific to this order
+    socket.join(`order_${orderId}`);
+  });
+  
+  // Handle client disconnection
+  socket.on('disconnect', () => {
+    console.log('Client disconnected', socket.id);
+  });
+});
+
+// Export io to be used in other files
+export { io };
+
 // Middleware
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://nosh-dash.vercel.app',
+    origin: process.env.NODE_ENV === 'production' 
+      ? 'https://nosh-dash.vercel.app' 
+      : 'http://localhost:5173',
     credentials: true,
   })
 );
@@ -35,7 +73,7 @@ app.get('/', (req, res) => {
 });
 
 // Start Server
-const server = app.listen(port, () => {
+const server = httpServer.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 

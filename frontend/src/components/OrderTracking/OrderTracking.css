@@ -1,0 +1,413 @@
+/* OrderTracking.css */
+.order-tracking-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  background-color: var(--uber-white);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Loading and Error States */
+.order-tracking-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--uber-light-gray);
+  border-top: 3px solid var(--uber-green);
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.order-tracking-error {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.order-tracking-error h2 {
+  color: #d32f2f;
+  margin-bottom: 16px;
+}
+
+.order-tracking-error button {
+  margin-top: 16px;
+}
+
+/* Notifications */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification {
+  background-color: var(--uber-green);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Order Tracking Header */
+.order-tracking-header {
+  margin-bottom: 40px;
+}
+
+.order-tracking-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--uber-black);
+}
+
+.order-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.order-number, .estimated-delivery {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-number span, .estimated-delivery span {
+  font-size: 14px;
+  color: var(--uber-dark-gray);
+}
+
+.order-number strong, .estimated-delivery strong {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Order Status Timeline */
+.order-status-timeline {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+  position: relative;
+  padding: 10px 0;
+}
+
+.status-point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.status-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--uber-light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--uber-dark-gray);
+  margin-bottom: 10px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.status-point.active .status-icon {
+  background-color: var(--uber-green);
+  color: white;
+}
+
+.status-point.current .status-icon {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(6, 193, 103, 0.2);
+}
+
+.status-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--uber-dark-gray);
+  max-width: 80px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.status-point.active .status-label {
+  color: var(--uber-black);
+  font-weight: 600;
+}
+
+.status-pulse {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--uber-green);
+  z-index: -1;
+}
+
+.status-line {
+  flex: 1;
+  height: 4px;
+  background-color: var(--uber-light-gray);
+  margin: 0 -15px;
+  margin-top: -35px;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.status-line.active {
+  background-color: var(--uber-green);
+}
+
+.status-line-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--uber-green);
+}
+
+/* Delivery Details */
+.delivery-details {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.order-summary, .delivery-address {
+  flex: 1;
+}
+
+.delivery-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--uber-black);
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--uber-light-gray);
+}
+
+.item-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.item-quantity {
+  color: var(--uber-dark-gray);
+  margin: 0 12px;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--uber-black);
+}
+
+.delivery-address p {
+  line-height: 1.6;
+  color: var(--uber-dark-gray);
+}
+
+/* Delivery Map */
+.delivery-map {
+  width: 100%;
+  height: 250px;
+  background-color: #f3f3f3;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  position: relative;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e2e2e2' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+  position: relative;
+}
+
+.animated-route {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+}
+
+.delivery-vehicle {
+  position: absolute;
+  font-size: 24px;
+  z-index: 3;
+}
+
+.restaurant-point {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 24px;
+}
+
+.delivery-point {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 24px;
+}
+
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.map-overlay p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.driver-info {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  gap: 12px;
+}
+
+.driver-photo {
+  font-size: 32px;
+}
+
+.driver-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.driver-vehicle {
+  font-size: 14px;
+  color: var(--uber-dark-gray);
+  margin: 4px 0 0 0;
+}
+
+/* Action Buttons */
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.support-button, .cancel-button {
+  flex: 1;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.support-button {
+  background-color: var(--uber-light-gray);
+  color: var(--uber-black);
+  border: none;
+}
+
+.support-button:hover {
+  background-color: var(--uber-medium-gray);
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #ffebee;
+}
+
+.cancel-button:disabled {
+  color: var(--uber-medium-gray);
+  border-color: var(--uber-medium-gray);
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-tracking-header h1 {
+    font-size: 24px;
+  }
+  
+  .delivery-details {
+    flex-direction: column;
+  }
+  
+  .order-status-timeline {
+    overflow-x: auto;
+    padding-bottom: 20px;
+  }
+  
+  .status-point {
+    min-width: 80px;
+  }
+  
+  .status-label {
+    font-size: 12px;
+  }
+}
+
+/* Animations for status updates */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease forwards;
+}
