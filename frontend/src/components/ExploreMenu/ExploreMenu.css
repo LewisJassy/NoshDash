@@ -61,3 +61,18 @@
         font-size: 14px;
     }
 }
+
+@media (max-width: 600px) {
+  .explore-menu-list {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .explore-menu-list-item img {
+    width: 60px;
+  }
+
+  .explore-menu-list-item p {
+    font-size: 14px;
+  }
+}

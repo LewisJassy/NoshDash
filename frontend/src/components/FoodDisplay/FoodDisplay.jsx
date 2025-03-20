@@ -1,10 +1,10 @@
-import { useContext } from 'react'
+import { memo, useContext } from 'react'
 import PropTypes from 'prop-types'
 import './FoodDisplay.css'
 import { StoreContext } from '../context/StoreContext'
 import FoodItem from '../FoodItem/FoodItem'
 
-const FoodDisplay = ({category}) => {
+const FoodDisplay = memo(({category}) => {
 
     const {food_list} = useContext(StoreContext)
   return (
@@ -19,7 +19,9 @@ const FoodDisplay = ({category}) => {
         </div>
     </div>
   )
-}
+})
+FoodDisplay.displayName = 'FoodDisplay';
+
 FoodDisplay.propTypes = {
   category: PropTypes.string.isRequired,
 }

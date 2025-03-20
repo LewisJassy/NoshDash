@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useContext, useState, useEffect } from 'react'; // Added useEffect
 import PropTypes from 'prop-types';
 import './Navbar.css';
@@ -5,7 +6,7 @@ import { assets } from './../../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from './../context/StoreContext';
 
-const Navbar = ({ setShowLogin }) => {
+const Navbar = memo(({ setShowLogin }) => {
   const [menu, setMenu] = useState('home');
   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
 
@@ -84,10 +85,12 @@ const Navbar = ({ setShowLogin }) => {
       </div>
     </div>
   );
-};
+});
 
 Navbar.propTypes = {
   setShowLogin: PropTypes.func.isRequired,
 };
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;

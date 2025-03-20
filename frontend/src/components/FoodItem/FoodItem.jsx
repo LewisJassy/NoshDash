@@ -1,10 +1,10 @@
-import { useContext } from 'react'
+import { memo, useContext } from 'react'
 import PropTypes from 'prop-types';
 import './FoodItem.css'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../context/StoreContext';
 
-const FoodItem = ({id,name,price,description,image}) => {
+const FoodItem = memo(({id,name,price,description,image}) => {
 
     const {cartItems,addToCart,removeFromCart,url} = useContext(StoreContext);
 
@@ -31,7 +31,9 @@ const FoodItem = ({id,name,price,description,image}) => {
         </div>
     </div>
   )
-}
+})
+FoodItem.displayName = 'FoodItem';
+
 FoodItem.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
