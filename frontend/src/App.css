@@ -1,42 +1,229 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: 'UberMoveText', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   scroll-behavior: smooth;
 }
 
-body{
-  min-height: 100vh;
+:root {
+  /* Uber Eats Color Scheme */
+  --uber-black: #000000;
+  --uber-white: #FFFFFF;
+  --uber-green: #06C167;
+  --uber-light-gray: #F6F6F6;
+  --uber-medium-gray: #E2E2E2;
+  --uber-dark-gray: #545454;
+  --uber-rating: #FFCA28;
+  
+  /* Font sizes */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 18px;
+  --font-xl: 20px;
+  --font-2xl: 24px;
+  --font-3xl: 28px;
+  --font-4xl: 32px;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-medium: 0.3s;
+  --transition-slow: 0.5s;
 }
 
-a{
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--uber-white);
+  color: var(--uber-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--uber-black);
   text-decoration: none;
-  color: inherit;
+  transition: color var(--transition-fast);
 }
 
-.app{
-  width: 80%;
-  margin: auto;
+a:hover {
+  color: var(--uber-green);
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+button {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  background-color: var(--uber-black);
+  color: var(--uber-white);
+}
+
+button:hover {
+  background-color: #333;
+  transform: scale(1.02);
+}
+
+button.primary {
+  background-color: var(--uber-black);
+  color: var(--uber-white);
+}
+
+button.secondary {
+  background-color: var(--uber-white);
+  color: var(--uber-black);
+  border: 1px solid var(--uber-black);
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: var(--font-md);
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--uber-black);
+  color: var(--uber-white);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #333;
+}
+
+.btn-secondary {
+  background-color: var(--uber-white);
+  color: var(--uber-black);
+  border: 1px solid var(--uber-medium-gray);
+}
+
+.btn-secondary:hover {
+  background-color: var(--uber-light-gray);
+}
+
+.btn-green {
+  background-color: var(--uber-green);
+  color: var(--uber-white);
+  border: none;
+}
+
+.btn-green:hover {
+  background-color: #05a85a;
+}
+
+/* Animations */
 @keyframes fadeIn {
-  0%{
-    opacity:0 ;
-  }
-  100%{
-    opacity: 1;
-  } 
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.app-content {
-    margin-top: 60px; /* Adjust this value to match the height of your navbar */
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Responsive layout */
 @media (max-width: 768px) {
   .app {
-    width: 95%;
-    padding: 0 10px;
+    width: 100%;
+    padding: 0;
   }
+  
+  button {
+    padding: 10px 16px;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+}
+
+/* Focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--uber-green);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--uber-light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--uber-medium-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--uber-dark-gray);
 }

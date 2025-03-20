@@ -1,3 +1,259 @@
 .home {
-    margin-top: 60px; /* Adjust this value to match the height of your navbar */
+  padding-top: 64px; /* Match navbar height */
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.home-hero {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/header_img.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--uber-white);
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 0 16px;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.address-search {
+  display: flex;
+  background-color: var(--uber-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.5s ease-out 0.2s backwards;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.address-input {
+  flex: 1;
+  padding: 16px 20px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.address-button {
+  padding: 16px 24px;
+  background-color: var(--uber-black);
+  color: var(--uber-white);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.address-button:hover {
+  background-color: #333;
+}
+
+/* Category Section */
+.category-section {
+  background-color: var(--uber-white);
+  padding: 24px 0;
+  position: relative;
+  z-index: 5;
+  border-bottom: 1px solid var(--uber-light-gray);
+}
+
+/* Sticky Search */
+.sticky-search {
+  position: sticky;
+  top: 64px;
+  background-color: var(--uber-white);
+  z-index: 990;
+  padding: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  border-bottom: 1px solid var(--uber-light-gray);
+}
+
+.sticky-search.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background-color: var(--uber-light-gray);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--uber-dark-gray);
+}
+
+.search-container input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: none;
+  padding: 0 40px 0 0;
+  font-size: 14px;
+  outline: none;
+}
+
+.clear-search {
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--uber-medium-gray);
+}
+
+/* Section Styling */
+section {
+  padding: 40px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--uber-black);
+}
+
+.view-all {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--uber-green);
+  transition: opacity 0.2s;
+}
+
+.view-all:hover {
+  opacity: 0.8;
+}
+
+/* Featured & Popular Sections */
+.featured-section {
+  background-color: var(--uber-white);
+}
+
+.popular-section {
+  background-color: var(--uber-white);
+  border-top: 1px solid var(--uber-light-gray);
+}
+
+.popular-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* App Section */
+.app-section {
+  background-color: var(--uber-light-gray);
+  padding: 60px 0;
+}
+
+/* Scroll Animation */
+.fade-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home {
+    padding-top: 56px; /* Match mobile navbar height */
+  }
+
+  .home-hero {
+    height: 300px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .address-search {
+    flex-direction: column;
+  }
+
+  .address-input {
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  .address-button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .sticky-search {
+    top: 56px;
+  }
+
+  section {
+    padding: 32px 0;
+  }
+
+  .section-header h2 {
+    font-size: 20px;
+  }
+  
+  /* Add padding at the bottom for the mobile nav bar */
+  .home {
+    padding-bottom: 72px;
+  }
 }

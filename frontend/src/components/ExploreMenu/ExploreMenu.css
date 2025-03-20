@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
+    width: 100%;
+    padding: 0;
+    position: relative;
 }
 
 .explore-menu h1{
@@ -74,5 +77,128 @@
 
   .explore-menu-list-item p {
     font-size: 14px;
+  }
+}
+
+/* Horizontal scrollable categories */
+.category-scroller {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  position: relative;
+  padding: 8px 0;
+}
+
+/* Hide scrollbar */
+.category-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item-wrapper {
+  flex: 0 0 auto;
+  padding: 0 8px;
+  display: flex;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 8px 0;
+}
+
+.category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--uber-light-gray);
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.category-icon img {
+  height: 60%;
+  width: 60%;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.category-item p {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--uber-dark-gray);
+  transition: color 0.2s;
+  margin: 0;
+  text-align: center;
+}
+
+/* Active state */
+.category-item.active .category-icon {
+  background-color: var(--uber-black);
+}
+
+.category-item.active img {
+  filter: brightness(0) invert(1);
+}
+
+.category-item.active p {
+  color: var(--uber-black);
+  font-weight: 600;
+}
+
+/* Hover state */
+.category-item:hover .category-icon {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-item:hover p {
+  color: var(--uber-black);
+}
+
+/* Fade effect on the right */
+.category-fade-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  pointer-events: none;
+}
+
+/* Animation for category selection */
+@keyframes selectPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.category-item.active .category-icon {
+  animation: selectPulse 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .category-item {
+    width: 70px;
+  }
+  
+  .category-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .category-item p {
+    font-size: 11px;
   }
 }

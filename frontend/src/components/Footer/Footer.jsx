@@ -1,50 +1,121 @@
-import './Footer.css'
-import { assets } from '../../assets/assets'
+import './Footer.css';
+import { assets } from '../../assets/assets';
+import { Link } from 'react-router-dom';
 
 /**
- * The Footer component.
+ * The Footer component styled to match Uber Eats design.
  * @returns {React.ReactElement} The Footer component.
- * @description The Footer component displays a footer with the app's name, a quote, social media icons, and a copyright notice.
  */
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <div className='footer' id='footer'>
-        <div className="footer-content">
-            <div className="footer-content-left">
-                <img src={assets.logo} alt="" />
-                <p>
-                    Enjoy the best meals from your favorite restaurants delivered fast and fresh to your doorstep. Whether you&apos;re craving pizza, sushi, or burgers, we&apos;ve got you covered. Order now and experience quick, convenient, and delicious food delivery at your fingertips.
-                </p>
-                <div className="footer-social-icons">
-                    <img src={assets.facebook_icon} alt="" />
-                    <img src={assets.twitter_icon} alt="" />
-                    <img src={assets.linkedin_icon} alt="" />
-                </div>
+    <footer className='footer' id='footer'>
+      <div className="footer-container">
+        <div className="footer-top">
+          <div className="footer-logo-section">
+            <img src={assets.logo} alt="NoshDash" className="footer-logo" />
+            <div className="app-stores">
+              <a href="#" className="app-store-link">
+                <img src={assets.app_store} alt="App Store" />
+              </a>
+              <a href="#" className="app-store-link">
+                <svg width="135" height="40" viewBox="0 0 135 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="135" height="40" rx="8" fill="black"/>
+                  <path d="M47.4207 10.752H42.2207V29.2H44.3127V21.968H47.4207C50.6687 21.968 52.8687 19.952 52.8687 16.352C52.8687 12.752 50.6687 10.752 47.4207 10.752ZM47.3767 20.016H44.3127V12.704H47.3767C49.4367 12.704 50.7207 13.92 50.7207 16.352C50.7207 18.8 49.4367 20.016 47.3767 20.016ZM60.1739 19.488C57.8459 19.488 56.3979 21.104 56.3979 23.696C56.3979 26.288 57.8459 27.92 60.1739 27.92C62.5019 27.92 63.9499 26.288 63.9499 23.696C63.9499 21.104 62.5019 19.488 60.1739 19.488ZM60.1739 21.344C61.3659 21.344 62.0299 22.256 62.0299 23.696C62.0299 25.152 61.3659 26.064 60.1739 26.064C58.9819 26.064 58.3179 25.152 58.3179 23.696C58.3179 22.256 58.9819 21.344 60.1739 21.344ZM71.3739 19.632H69.4539V17.376H67.5499V19.632H66.1819V21.36H67.5499V25.552C67.5499 27.104 68.5019 27.92 70.1419 27.92C70.7899 27.92 71.2859 27.808 71.6219 27.68L71.1739 25.968C70.9739 26.032 70.7259 26.08 70.4299 26.08C69.8139 26.08 69.4539 25.776 69.4539 25.088V21.36H71.3739V19.632ZM78.5708 19.488C76.4628 19.488 74.9668 21.104 74.9668 23.696C74.9668 26.304 76.4308 27.92 78.6468 27.92C79.9788 27.92 81.0508 27.424 81.7468 26.496L80.5708 25.28C80.0748 25.872 79.4268 26.16 78.7148 26.16C77.6428 26.16 76.9468 25.584 76.8228 24.496H82.1628V23.792C82.1628 21.12 80.7148 19.488 78.5708 19.488ZM76.8388 23.04C76.9308 22.032 77.5628 21.248 78.5868 21.248C79.5788 21.248 80.1948 21.984 80.2708 23.04H76.8388ZM86.3127 21.6C86.3127 20.752 86.8567 20.208 87.7767 20.208C88.4407 20.208 88.9207 20.528 89.1847 21.04L90.7607 20.112C90.2327 19.296 89.2247 18.8 87.7767 18.8C85.8087 18.8 84.3927 20.016 84.3927 21.6C84.3927 25.392 89.2887 24.352 89.2887 26.048C89.2887 26.928 88.6407 27.472 87.6327 27.472C86.6247 27.472 86.0087 26.976 85.6887 26.272L84.1127 27.28C84.7927 28.416 85.9047 29.168 87.6327 29.168C89.6807 29.168 91.2407 27.984 91.2407 26.048C91.2407 22.16 86.3127 23.184 86.3127 21.6ZM96.5846 18.8C95.2046 18.8 94.2766 19.424 93.8286 20.288V19.008H91.9246V29.2H93.8286V23.728C93.8286 22.144 94.6206 20.832 96.2126 20.832C96.6126 20.832 97.0126 20.912 97.3166 21.04L97.9326 19.008C97.5966 18.88 97.0686 18.8 96.5846 18.8ZM102.175 19.488C99.8467 19.488 98.3987 21.104 98.3987 23.696C98.3987 26.288 99.8467 27.92 102.175 27.92C104.503 27.92 105.951 26.288 105.951 23.696C105.951 21.104 104.503 19.488 102.175 19.488ZM102.175 21.344C103.367 21.344 104.031 22.256 104.031 23.696C104.031 25.152 103.367 26.064 102.175 26.064C100.983 26.064 100.319 25.152 100.319 23.696C100.319 22.256 100.983 21.344 102.175 21.344ZM113.375 19.632H111.455V17.376H109.551V19.632H108.183V21.36H109.551V25.552C109.551 27.104 110.503 27.92 112.143 27.92C112.791 27.92 113.287 27.808 113.623 27.68L113.175 25.968C112.975 26.032 112.727 26.08 112.431 26.08C111.815 26.08 111.455 25.776 111.455 25.088V21.36H113.375V19.632ZM119.33 19.008V19.872C118.834 19.568 118.178 19.376 117.474 19.376C115.43 19.376 113.89 20.992 113.89 23.552C113.89 26.112 115.43 27.728 117.474 27.728C118.194 27.728 118.866 27.536 119.346 27.232V27.584C119.346 28.88 118.514 29.648 117.234 29.648C116.194 29.648 115.498 29.2 115.162 28.448L113.538 29.344C114.13 30.464 115.386 31.248 117.234 31.248C119.65 31.248 121.25 29.792 121.25 27.52V19.008H119.33ZM117.698 25.92C116.458 25.92 115.81 24.992 115.81 23.552C115.81 22.112 116.458 21.184 117.698 21.184C118.242 21.184 118.882 21.408 119.346 21.76V25.344C118.882 25.696 118.242 25.92 117.698 25.92ZM127.249 19.488C126.049 19.488 125.201 19.936 124.689 20.672V19.008H122.785V27.728H124.689V23.216C124.689 21.936 125.369 21.28 126.401 21.28C127.353 21.28 127.913 21.872 127.913 22.944V27.728H129.817V22.576C129.817 20.656 128.817 19.488 127.249 19.488Z" fill="white"/>
+                  <path d="M68.136 14.0557L70.5022 10.0057C70.5649 9.89935 70.5336 9.76764 70.4271 9.70557C70.3207 9.6435 70.189 9.67471 70.1269 9.78107L67.7338 13.8702C65.8878 12.9318 63.7398 12.9318 61.8938 13.8702L59.5007 9.78107C59.4387 9.67471 59.3069 9.6435 59.2005 9.70557C59.094 9.76764 59.0627 9.89935 59.1255 10.0057L61.4916 14.0557C59.4324 15.3239 58.0565 17.5084 58 20.0002H72.0276C71.9711 17.5084 70.5952 15.3239 68.536 14.0557H68.136ZM63.6185 17.4783C63.164 17.4783 62.7956 17.1099 62.7956 16.6554C62.7956 16.2009 63.164 15.8324 63.6185 15.8324C64.073 15.8324 64.4414 16.2009 64.4414 16.6554C64.4414 17.1099 64.073 17.4783 63.6185 17.4783ZM66.4091 17.4783C65.9546 17.4783 65.5862 17.1099 65.5862 16.6554C65.5862 16.2009 65.9546 15.8324 66.4091 15.8324C66.8636 15.8324 67.232 16.2009 67.232 16.6554C67.232 17.1099 66.8636 17.4783 66.4091 17.4783Z" fill="white"/>
+                </svg>
+              </a>
             </div>
-            <div className="footer-content-center">
-                <h2>COMPANY</h2>
-                <ul>
-                    <li>Home</li>
-                    <li>About us</li>
-                    <li>Delivery</li>
-                    <li>Privacy Policy</li>
-                </ul>
+          </div>
+          
+          <div className="footer-links-section">
+            <div className="footer-links-column">
+              <h3>Get to Know Us</h3>
+              <ul>
+                <li><Link to="/about">About Us</Link></li>
+                <li><Link to="/careers">Careers</Link></li>
+                <li><Link to="/blog">Company Blog</Link></li>
+                <li><Link to="/news">News</Link></li>
+              </ul>
             </div>
-            <div className="footer-content-right">
-                <h2>GET IN TOUCH</h2>
-                <ul>
-                    <li>+254 793614504</li>
-                    <li>jassylewis70@gmail.com</li>
-                </ul>
+            
+            <div className="footer-links-column">
+              <h3>Useful Links</h3>
+              <ul>
+                <li><Link to="/support">Support</Link></li>
+                <li><Link to="/restaurants">Restaurants</Link></li>
+                <li><Link to="/delivery">Become a Delivery Partner</Link></li>
+                <li><Link to="/business">For Business</Link></li>
+              </ul>
             </div>
-           
+            
+            <div className="footer-links-column">
+              <h3>Legal</h3>
+              <ul>
+                <li><Link to="/terms">Terms & Conditions</Link></li>
+                <li><Link to="/privacy">Privacy Policy</Link></li>
+                <li><Link to="/cookies">Cookies Policy</Link></li>
+                <li><Link to="/payments">Payments</Link></li>
+              </ul>
+            </div>
+            
+            <div className="footer-links-column">
+              <h3>Follow Us</h3>
+              <div className="social-icons">
+                <a href="#" className="social-icon">
+                  <img src={assets.facebook_icon} alt="Facebook" />
+                </a>
+                <a href="#" className="social-icon">
+                  <img src={assets.twitter_icon} alt="Twitter" />
+                </a>
+                <a href="#" className="social-icon">
+                  <img src={assets.linkedin_icon} alt="LinkedIn" />
+                </a>
+                <a href="#" className="social-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C14.717 2 15.056 2.01 16.122 2.06C17.187 2.11 17.912 2.277 18.55 2.525C19.21 2.779 19.766 3.123 20.322 3.678C20.8305 4.1779 21.224 4.78259 21.475 5.45C21.722 6.087 21.89 6.813 21.94 7.878C21.987 8.944 22 9.283 22 12C22 14.717 21.99 15.056 21.94 16.122C21.89 17.187 21.722 17.912 21.475 18.55C21.2247 19.2178 20.8311 19.8226 20.322 20.322C19.822 20.8303 19.2173 21.2238 18.55 21.475C17.913 21.722 17.187 21.89 16.122 21.94C15.056 21.987 14.717 22 12 22C9.283 22 8.944 21.99 7.878 21.94C6.813 21.89 6.088 21.722 5.45 21.475C4.78233 21.2245 4.17753 20.8309 3.678 20.322C3.16941 19.8222 2.77593 19.2175 2.525 18.55C2.277 17.913 2.11 17.187 2.06 16.122C2.013 15.056 2 14.717 2 12C2 9.283 2.01 8.944 2.06 7.878C2.11 6.812 2.277 6.088 2.525 5.45C2.77524 4.78218 3.1688 4.17732 3.678 3.678C4.17767 3.16923 4.78243 2.77573 5.45 2.525C6.088 2.277 6.812 2.11 7.878 2.06C8.944 2.013 9.283 2 12 2ZM12 7C10.6739 7 9.40215 7.52678 8.46447 8.46447C7.52678 9.40215 7 10.6739 7 12C7 13.3261 7.52678 14.5979 8.46447 15.5355C9.40215 16.4732 10.6739 17 12 17C13.3261 17 14.5979 16.4732 15.5355 15.5355C16.4732 14.5979 17 13.3261 17 12C17 10.6739 16.4732 9.40215 15.5355 8.46447C14.5979 7.52678 13.3261 7 12 7ZM18.5 6.75C18.5 6.41848 18.3683 6.10054 18.1339 5.86612C17.8995 5.6317 17.5815 5.5 17.25 5.5C16.9185 5.5 16.6005 5.6317 16.3661 5.86612C16.1317 6.10054 16 6.41848 16 6.75C16 7.08152 16.1317 7.39946 16.3661 7.63388C16.6005 7.8683 16.9185 8 17.25 8C17.5815 8 17.8995 7.8683 18.1339 7.63388C18.3683 7.39946 18.5 7.08152 18.5 6.75ZM12 9C12.7956 9 13.5587 9.31607 14.1213 9.87868C14.6839 10.4413 15 11.2044 15 12C15 12.7956 14.6839 13.5587 14.1213 14.1213C13.5587 14.6839 12.7956 15 12 15C11.2044 15 10.4413 14.6839 9.87868 14.1213C9.31607 13.5587 9 12.7956 9 12C9 11.2044 9.31607 10.4413 9.87868 9.87868C10.4413 9.31607 11.2044 9 12 9Z" fill="black"/>
+                  </svg>
+                </a>
+              </div>
+              
+              <div className="contact-info">
+                <p>Email: support@noshdash.com</p>
+                <p>Phone: +254 793614504</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <hr />
-        <p className="footer-copyright">
-            Copyright 2024 &copy; Lewis - All Right Reserved.
-        </p>
-    </div>
-  )
-}
+        
+        <div className="footer-bottom">
+          <div className="language-selector">
+            <div className="language-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 12H22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <select name="language" id="language-select">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+            </select>
+          </div>
+          
+          <p className="copyright">
+            &copy; {currentYear} NoshDash Technologies Ltd. All rights reserved.
+          </p>
+          
+          <div className="footer-app-links">
+            <a href="#" className="footer-app-link">NoshDash Business</a>
+            <a href="#" className="footer-app-link">Become a Partner</a>
+            <a href="#" className="footer-app-link">Get the App</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;
